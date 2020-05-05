@@ -1,0 +1,17 @@
+{% extends "pizzas/base.html" %}
+
+{% block content %}
+
+    <!-- includes the pizza_id value in the URL, so the view function can associate the new entry with the correct pizza-->
+    <p><a href="{% url 'pizzas:pizza' pizza.id %}">{{ pizza }}</a></p>
+
+     <p>Comments:</p>
+
+    <form action="{% url 'pizzas:new_comment' pizza.id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+    <button name="submit">Add comment</button>
+    </form>
+
+{% endblock content %}

@@ -17,3 +17,13 @@ class Topping(models.Model):
     
     def __str__(self):
         return f"{self.name[:50]}..."
+
+
+class Comment(models.Model):
+    pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE)
+    text = models.TextField()
+    class Mate:
+        verbose_name_plural = 'comments'
+    
+    def __str__(self):
+        return f"{self.text[:50]}..."
