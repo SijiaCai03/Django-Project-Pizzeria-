@@ -1,7 +1,39 @@
 {% extends "pizzas/base.html" %}
 
+{% block page_header %}
+    <h3>{{ pizza }}</h3>
+{% endblock page_header %}
+
 {% block content %}
 
+    {% for topping in toppings %}
+    <div class="card mb-3"> <!--which places the text of the entry in a simple box on the card. 
+        Notice that the Django code for including the information on the page hasn’t changed;
+        only the elements that affect the appearance of the page have changed.-->
+        {{ topping.name|linebreaks }}
+    </div>
+    {% empty %}
+    There are no toppings for this pizza yet.
+    {% endfor %}
+
+    <h3>Comments:</h3>
+
+    {% for comment in comments %}
+    <div class="card mb-3">
+        {{ comment.text|linebreaks }}
+    </div>
+    {% empty %}
+    There are no comments for this pizza yet.
+    {% endfor %}
+
+    <p>
+        <a href="{% url 'pizzas:new_comment' pizza.id %}">Add new comment</a>
+    </p>
+
+{% endblock content %}
+
+
+<!-- 
     <p>Pizza: {{ pizza }}</p>
 
     <ul>
@@ -29,5 +61,4 @@
     <p>
         <a href="{% url 'pizzas:new_comment' pizza.id %}">Add new comment</a>
     </p>
-
-{% endblock content %}
+ -->

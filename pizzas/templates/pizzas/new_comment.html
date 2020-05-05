@@ -1,8 +1,30 @@
 {% extends "pizzas/base.html" %}
 
-{% block content %}
+{% load bootstrap4 %}
 
-    <!-- includes the pizza_id value in the URL, so the view function can associate the new entry with the correct pizza-->
+{% block page_header %}
+    <li><h1>
+        <a href="{% url 'pizzas:pizza' pizza.id %}">{{ pizza }}</a>
+    </h1></li>
+{% endblock page_header %}
+
+{% block content %}
+    <h3>Comments:</h3>
+
+    <form method="post" action="{% url 'users:login' %}" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+    
+        {% buttons %}
+            <button name="submit" class="btn btn-primary">Add comment</button>
+        {% endbuttons %}
+    </form>
+
+{% endblock content %}
+
+
+<!-- 
+    includes the pizza_id value in the URL, so the view function can associate the new entry with the correct pizza
     <p><a href="{% url 'pizzas:pizza' pizza.id %}">{{ pizza }}</a></p>
 
      <p>Comments:</p>
@@ -13,5 +35,4 @@
 
     <button name="submit">Add comment</button>
     </form>
-
-{% endblock content %}
+-->
